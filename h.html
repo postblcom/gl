@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ランダムグラデーション</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .button-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .gradient-container {
+            position: relative;
+            display: inline-block;
+            margin: 10px;
+        }
+        .gradient-box {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+            border: 2px solid #000;
+        }
+        .color-codes {
+            text-align: center;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        #container, #saved-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 80%;
+            margin: 0 auto;
+        }
+        #saved-container {
+            margin-top: 20px;
+        }
+        .selected {
+            border: 3px solid red;
+        }
+        .resize-controls {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 5px;
+        }
+        .resize-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 5px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .resize-button:hover {
+            background-color: #0056b3;
+        }
+        #slideshow-container {
+            display: none;
+            width: 80%;
+            height: 400px;
+            background-color: #f0f0f0;
+            position: relative;
+            margin-top: 20px;
+        }
+        #slideshow {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .slideshow-image {
+            width: 100%;
+            height: 100%;
+        }
+        .slideshow-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .slideshow-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button onclick="generateGradients()">グラデーション生成</button>
+        <button onclick="deleteSelectedGradients()">選択削除</button>
+        <button onclick="deleteAllGradients()">一括削除</button>
+        <button onclick="saveSelectedGradientsAsZip()">選択をZIPとして保存</button>
+        <button onclick="startSlideshow()">スライドショー開始</button>
+  <button onclick="applySelectedGradientAsBackground()">背景に設定</button>
+<button onclick="saveSelectedGradientAsImage()">画像保存</button>
+<button onclick="saveSelectedGradientWithText()">テキスト付き保存</button>
+
+  </div>
+     
+<div class="input-container">
+    <input type="text" id="color1" placeholder="#FF5733">
+    <input type="text" id="color2" placeholder="#33FF57">
+    <button onclick="generateGradientFromInput()">入力からグラデーション生成</button>
+<button onclick="togglePopup()">ポップアップ表示/非表示</button>
+
+
+
+<button onclick="resetGradients()">生成結果をリセット</button>
+
+</div>
+
+
+    <div id="container"></div>
+    <h2>保存されたグラデーション</h2>
+    <div id="saved-container"></div>
+    <div id="slideshow-container">
+        <div id="slideshow"></div>
+        <div class="slideshow-controls">
+            <button class="slideshow-button" onclick="previousSlide()">&#10094;</button>
+            <button class="slideshow-button" onclick="nextSlide()">&#10095;</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.min.js"></script>
+    <script src="h.js"></script>
+</body>
+</html>
